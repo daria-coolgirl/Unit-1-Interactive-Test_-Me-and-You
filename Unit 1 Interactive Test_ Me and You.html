@@ -1,0 +1,70 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Unit 1 Test: Me and You</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFF6DC;--ink:#1B2A49;--card:#fff;--ok:#2E9E5B;--bad:#E5484D;--chip:#FFD93D;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14203A;--ink:#F3EBD3;--card:#1E2D4F;--ok:#5CD08A;--bad:#FF8A8D;--chip:#C9A227}}
+:root[data-theme="dark"]{--bg:#14203A;--ink:#F3EBD3;--card:#1E2D4F;--ok:#5CD08A;--bad:#FF8A8D;--chip:#C9A227}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:500 17px/1.5 'Baloo 2','Comic Sans MS',sans-serif}
+main{max-width:760px;margin:0 auto;padding:16px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--chip);color:#1B2A49;border:3px solid #1B2A49;border-radius:18px;padding:6px 14px;box-shadow:4px 4px 0 #1B2A49;font-weight:800}
+h1{font-size:30px;margin:18px 0 4px}
+.s{position:relative;background:var(--card);border:3px solid var(--ink);border-radius:18px;padding:22px 16px 10px;margin:34px 0 14px;box-shadow:4px 4px 0 var(--ink)}
+.h{position:absolute;top:-20px;left:10px;color:#1B2A49;border:3px solid var(--ink);border-radius:20px;padding:0 14px;font-weight:800}
+.sub{font-weight:700;margin:0 0 6px}.q{margin:10px 0;padding:6px 8px;border-radius:12px}
+.q.ok{background:color-mix(in srgb,var(--ok) 18%,transparent)}.q.no{background:color-mix(in srgb,var(--bad) 18%,transparent)}
+input[type=text]{font:inherit;color:var(--ink);background:transparent;border:0;border-bottom:2px solid var(--ink);min-width:110px;max-width:100%;padding:2px 4px;outline:0}
+input[type=text]:focus{border-bottom-color:#FF6B6B}.w{display:block;width:100%;margin-top:4px}
+label.o{display:inline-block;margin:3px 6px 3px 0}label.o span{display:inline-block;border:2px solid var(--ink);border-radius:14px;padding:0 12px;cursor:pointer}
+label.o input{position:absolute;opacity:0}label.o input:checked+span{background:var(--chip);color:#1B2A49;font-weight:800}
+label.o input:focus-visible+span{outline:3px solid #FF6B6B}
+.k{display:inline-block;background:var(--chip);color:#1B2A49;border:2px solid #1B2A49;border-radius:12px;padding:0 10px;margin:2px 3px;font-weight:700}
+button{font:800 17px 'Baloo 2',sans-serif;background:#FF6B6B;color:#1B2A49;border:3px solid #1B2A49;border-radius:16px;padding:6px 22px;min-height:44px;box-shadow:3px 3px 0 #1B2A49;cursor:pointer}
+button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #1B2A49}button.sm{font-size:14px;min-height:36px;padding:0 12px;background:var(--chip)}
+.fb{display:block;font-size:15px;font-weight:700;color:var(--bad)}.ok .fb{color:var(--ok)}
+#res{display:none;text-align:center;margin:20px 0}#res b{font-size:44px}
+</style></head><body><main>
+<div class="top"><span>Unit 1 &middot; Me and You</span><span id="tm">20:00</span><button class="sm" id="th" aria-label="Toggle dark mode">Light/Dark</button></div>
+<h1>Passport to Me and You</h1><p class="sub">Tip: the timer starts when you answer the first question. 50 points. Good luck!</p>
+<div id="t"></div>
+<div style="text-align:center;margin:18px 0"><button id="ck">Check my answers</button> <button id="rs" class="sm">Start again</button></div>
+<div class="s" id="res" style="display:none"><div id="rt"></div></div>
+</main>
+<script>
+const P=[
+["#FF8FA3","1 Word Detective","Write the word for each clue.",["unemployed","file","scissors","nephews","tissues","South African","driving licence","grandchildren"],[
+["f","You need it to drive a car: ___",["driving licence"]],["f","You cut paper with them: ___",["scissors"]],["f","You use them when you have a cold: ___",["tissues"]],["f","A person without a job: ___",["unemployed"]],["f","Your brother's sons: ___",["nephews"]],["f","Your children's children: ___",["grandchildren"]],["f","A person from Cape Town: ___",["south african"]],["f","You save documents on a computer in it: ___",["file"]]]],
+["#8FD3FE","2 Grammar Gym","A. Choose. B. Write the correct form.",0,[
+["m","Greta ___ from Sweden.",["am","is"],1],["m","My parents ___ in a small village.",["lives","live"],1],["m","Sam ___ up at eleven.",["get","gets"],1],["m","___ you work with Pietro?",["Do","Does"],0],["m","Andy ___ have a lot of money.",["don't","doesn't"],1],["m","What time ___ she start work?",["do","does"],1],
+["f","My brother ___ (work) in a theatre.",["works"]],["f","Sam ___ (study) Chinese every day.",["studies"]],["f","We ___ (not live) in a village.",["don't live|do not live"]],["f","___ your sister ___ (play) tennis?",["does","play"]],["f","Marco and Rita ___ (live) with friends.",["live"]],["f","What time ___ Andy ___ (get up)?",["does","get up"]]]],
+["#FFD93D","3 Passport Control","A. Write the country or nationality. B. Who am I?",0,[
+["f","Pelé is from Brazil. He is ___.",["brazilian"]],["f","Marco is Italian. He is from ___.",["italy"]],["f","Anna is from Poland. She is ___.",["polish"]],["f","Athens is in Greece. People from Athens are ___.",["greek"]],
+["m","I work at an airport and fly planes.",["driver","pilot"],1],["m","I work in a hospital and help doctors.",["nurse","teacher"],0],["m","I make websites on a computer.",["manager","digital designer"],1],["m","I study law and work in court.",["lawyer","waiter"],0]]],
+["#B8E986","4 Time Machine","Choose the correct time phrase.",0,[
+["m","The class starts ___.",["in half past nine","at half past nine"],1],["m","Lunch is ___.",["in noon","at noon"],1],["m","Today is Thursday. Let's meet ___.",["last Thursday","next Thursday"],1],["m","It's 6 p.m. Do you want to do something ___?",["this evening","at evening"],0],["m","The meeting is ___.",["in Tuesday afternoon","on Tuesday afternoon"],1],["m","I don't work ___.",["at the weekend","in the weekend"],0]]],
+["#FFB36B","5 Puzzles and Bug Hunters","A. Put the words in order. B. Find the bug and write the correct sentence.",0,[
+["w","alone / lives / She",["She lives alone."]],["w","English / He / every day / studies",["He studies English every day."]],["w","work / you / do / Where",["Where do you work?"]],["w","out / go / a lot / They",["They go out a lot."]],
+["w","Bug: He work from home.",["He works from home."]],["w","Bug: Do she live with friends?",["Does she live with friends?"]],["w","Bug: They doesn't have a car.",["They don't have a car.","They do not have a car."]],["w","Bug: Where does your parents work?",["Where do your parents work?"]]]],
+["#D6A4FF","6 Family Album","A. Make sentences. B. Maria's ID card: from Brazil, nurse, gets up 6:30, brother lives in Australia.",0,[
+["w","my wife / work / for a company",["My wife works for a company.","My wife works in a company."]],["w","he / have / two sisters",["He has two sisters.","He has got two sisters."]],["w","their grandparents / live / in Italy",["Their grandparents live in Italy."]],["w","she / teach / English / at a university",["She teaches English at a university.","She teaches English at university."]],
+["w","Where is Maria from?",["Maria is from Brazil.","She is from Brazil.","Maria comes from Brazil."]],["w","What is her job?",["She is a nurse.","Maria is a nurse."]],["w","When does she get up?",["She gets up at half past six.","She gets up at 6:30.","She gets up at six thirty."]],["w","Where does her brother live?",["Her brother lives in Australia.","Her brother lives in Australia"]]]]];
+const n=s=>s.toLowerCase().replace(/[’‘]/g,"'").replace(/\b(she|he|it|maria)'s\b/g,"$1 is").replace(/[.?!]+$/,"").replace(/\s+/g," ").trim();
+const T=document.getElementById("t");let id=0,Q=[],done=false,sec=1200,iv=null,pts=0;
+function build(){T.innerHTML="";Q=[];id=0;done=false;pts=0;P.forEach((p,pi)=>{let h='<div class="s"><div class="h" style="background:'+p[0]+'">'+p[1]+'</div><p class="sub">'+p[2]+'</p>';if(p[3])h+=p[3].map(w=>'<span class="k">'+w+'</span>').join("");
+p[4].forEach(q=>{const i=id++;Q.push(q);let b="";
+if(q[0]=="m")b=q[1].replace("___","<b>___</b>")+"<br>"+q[2].map((o,j)=>'<label class="o"><input type="radio" name="r'+i+'" value="'+j+'"><span>'+o+'</span></label>').join("");
+else if(q[0]=="f"){let k=0;b=q[1].replace(/___/g,()=>'<input type="text" data-i="'+i+'" data-k="'+(k++)+'" autocomplete="off" autocapitalize="off" aria-label="answer">')}
+else b=q[1]+'<input type="text" class="w" data-i="'+i+'" data-k="0" autocomplete="off" aria-label="answer">';
+h+='<div class="q" id="q'+i+'"><b>'+(i%100+1)+'.</b> '+b+'<span class="fb"></span></div>'});T.insertAdjacentHTML("beforeend",h+"</div>")});
+let c=0;T.querySelectorAll(".q").forEach(e=>{const m=e.id.slice(1);});renum()}
+function renum(){let c=0;P.forEach((p,pi)=>{const s=T.children[pi];s.querySelectorAll(".q > b:first-child").forEach(b=>{b.textContent=(++c)+"."})})}
+function mark(i,ok,extra){const e=document.getElementById("q"+i);e.classList.add(ok?"ok":"no");const f=e.querySelector(".fb");f.textContent=ok?"Correct!":"Answer: "+extra;if(!ok&&Q[i][0]=="w"){const b=document.createElement("button");b.className="sm";b.textContent="My answer is also correct";b.onclick=()=>{e.classList.replace("no","ok");f.textContent="Accepted by teacher";b.remove();pts++;show()};f.after(b)}if(ok)pts++}
+function show(){const r=document.getElementById("res");r.style.display="block";document.getElementById("rt").innerHTML="<b>"+pts+" / "+Q.length+"</b><br>"+(pts>=45?"Excellent! You are a Unit 1 superstar.":pts>=38?"Good job! Check the red answers.":pts>=30?"OK! Review the grammar and try again.":"Review Unit 1 and try again. You can do it!")}
+function check(){if(done)return;done=true;clearInterval(iv);Q.forEach((q,i)=>{if(q[0]=="m"){const c=document.querySelector('input[name="r'+i+'"]:checked');mark(i,c&&+c.value==q[3],q[2][q[3]])}
+else{const ins=[...document.querySelectorAll('input[data-i="'+i+'"]')];const ok=q[0]=="f"?ins.every((x,k)=>q[2][k].split("|").includes(n(x.value))):q[2].map(n).includes(n(ins[0].value));mark(i,ok,q[2].join(" / "))}});show();document.getElementById("res").scrollIntoView({behavior:"smooth"})}
+function tick(){sec--;if(sec<=0){sec=0;check()}const m=String(Math.floor(sec/60)).padStart(2,"0"),s=String(sec%60).padStart(2,"0");document.getElementById("tm").textContent=m+":"+s}
+T.addEventListener("input",()=>{if(!iv&&!done)iv=setInterval(tick,1000)});T.addEventListener("change",()=>{if(!iv&&!done)iv=setInterval(tick,1000)});
+document.getElementById("ck").onclick=check;
+document.getElementById("rs").onclick=()=>{clearInterval(iv);iv=null;sec=1200;document.getElementById("tm").textContent="20:00";document.getElementById("res").style.display="none";build();scrollTo(0,0)};
+document.getElementById("th").onclick=()=>{const d=document.documentElement,dark=getComputedStyle(d).getPropertyValue("--bg").trim()=="#14203A";d.setAttribute("data-theme",dark?"light":"dark")};
+build();
+</script></body></html>
